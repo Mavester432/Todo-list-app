@@ -1,0 +1,1 @@
+A simple, lightweight to-do list application designed to help users manage tasks efficiently. This app allows users to add, view, complete, and delete tasks from their to-do list. It's built as a minimum viable product (MVP) to demonstrate core functionalities of a task management system.
