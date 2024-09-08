@@ -119,7 +119,7 @@
         }
 
         .task-list button.done {
-            background-color: #dc3545;
+            background-color: green;
         }
 
         .task-list button.not-done {
@@ -202,7 +202,7 @@
                 if (task.achieved) {
                     li.innerHTML = `
                     <span>${task.name} - ${task.date}</span>
-                    <button onclick="markAsAchieved(${index})" class="not-done">Done</button>
+                    <button onclick="markAsAchieved(${index})" class="done">Done</button>
                     `;
                 } else {
                     li.innerHTML = `
