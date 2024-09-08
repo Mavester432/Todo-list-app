@@ -199,14 +199,17 @@
 
             tasks.forEach((task, index) => {
                 const li = document.createElement('li');
-                li.innerHTML = `
+                if (task.achieved) {
+                    li.innerHTML = `
                     <span>${task.name} - ${task.date}</span>
-                    <>
-                    {task.achieved ?
-                    (<button onclick="markAsAchieved(${index})" class="not-done">Done</button>):
-                    (<button onclick="markAsAchieved(${index})" class="not-done">Not Done</button>)}
-                    </>
-                `;
+                    <button onclick="markAsAchieved(${index})" class="not-done">Done</button>
+                    `;
+                } else {
+                    li.innerHTML = `
+                    <span>${task.name} - ${task.date}</span>
+                    <button onclick="markAsAchieved(${index})" class="not-done">Not Done</button>
+                    `;
+                }
                 taskList.appendChild(li);
             });
         }
