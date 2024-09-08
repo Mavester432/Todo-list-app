@@ -37,7 +37,6 @@
             border-radius: 10px;
         }
 
-        /* Dropdown menu styling */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -82,27 +81,155 @@
         .dropdown:hover .dropdown-btn {
             background-color: #218838;
         }
+
+        /* Add task form and achieved tasks */
+        #task-form, #achieved-tasks {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .task-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .task-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .task-list li span {
+            flex-grow: 1;
+            margin-left: 10px;
+        }
+
+        .task-list button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .task-list button.done {
+            background-color: #dc3545;
+        }
+
+        .task-list button.not-done {
+            background-color: #ffc107;
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header -->
         <h1>TO DO LIST APP</h1>
         
-        <!-- Large Image -->
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ1Clqh4TCTb-H8s3dF-wjcid6UZWDLC8-OS5m1G3kddPrHXplgOKVYyhw&s=10" alt="To-Do List Image">
         
         <!-- Dropdown Button -->
         <div class="dropdown">
             <button class="dropdown-btn">⋮</button>
             <div class="dropdown-content">
-                <a href="#">Tasks</a>
-                <a href="#">Achieved</a>
+                <a href="#" onclick="showSection('task-form')">Tasks</a>
+                <a href="#" onclick="showSection('achieved-tasks')">Achieved</a>
                 <a href="#">Reminder</a>
             </div>
         </div>
+
+        <!-- Task Form Section -->
+        <div id="task-form">
+            <h2>Create your tasks that you want to achieve</h2>
+            <form onsubmit="addTask(event)">
+                <input type="text" id="task-name" placeholder="Enter your task" required>
+                <input type="date" id="task-date" required>
+                <button type="submit">Add Task</button>
+            </form>
+            <ul id="task-list" class="task-list"></ul>
+        </div>
+
+        <!-- Achieved Tasks Section -->
+        <div id="achieved-tasks">
+            <h2>Your Achieved Tasks</h2>
+            <ul id="achieved-list" class="task-list"></ul>
+        </div>
     </div>
+
+    <script>
+        let tasks = [];
+
+        // Function to show different sections (Tasks, Achieved)
+        function showSection(sectionId) {
+            document.getElementById('task-form').style.display = 'none';
+            document.getElementById('achieved-tasks').style.display = 'none';
+
+            document.getElementById(sectionId).style.display = 'block';
+
+            if (sectionId === 'achieved-tasks') {
+                displayAchievedTasks();
+            }
+        }
+
+        // Function to add a new task
+        function addTask(event) {
+            event.preventDefault();
+            const taskName = document.getElementById('task-name').value;
+            const taskDate = document.getElementById('task-date').value;
+
+            const task = { name: taskName, date: taskDate, achieved: false };
+            tasks.push(task);
+
+            document.getElementById('task-name').value = '';
+            document.getElementById('task-date').value = '';
+
+            displayTasks();
+        }
+
+        // Function to display tasks in the task list
+        function displayTasks() {
+            const taskList = document.getElementById('task-list');
+            taskList.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span>${task.name} - ${task.date}</span>
+                    <button onclick="markAsAchieved(${index})" class="not-done">Not Done</button>
+                `;
+                taskList.appendChild(li);
+            });
+        }
+
+        // Function to mark a task as achieved
+        function markAsAchieved(index) {
+            tasks[index].achieved = true;
+            displayTasks();
+        }
+
+        // Function to display achieved tasks
+        function displayAchievedTasks() {
+            const achievedList = document.getElementById('achieved-list');
+            achievedList.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                if (task.achieved) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>${task.name} - ${task.date}</span>
+                        <button class="done">Done</button>
+                    `;
+                    achievedList.appendChild(li);
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
