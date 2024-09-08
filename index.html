@@ -201,7 +201,9 @@
                 const li = document.createElement('li');
                 li.innerHTML = `
                     <span>${task.name} - ${task.date}</span>
-                    <button onclick="markAsAchieved(${index})" class="not-done">${task.achieved} ? Task Done : Not Done</button>
+                    {task.achieved ?
+                    (<button onclick="markAsAchieved(${index})" class="not-done">Done</button>):
+                    (<button onclick="markAsAchieved(${index})" class="not-done">Not Done</button>)}
                 `;
                 taskList.appendChild(li);
             });
