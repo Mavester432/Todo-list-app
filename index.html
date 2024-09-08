@@ -44,7 +44,9 @@
         }
 
         .dropdown {
-            position: relative;
+            position: absolute;
+            top: 20px;
+            right: 20px;
             display: inline-block;
         }
 
@@ -88,7 +90,7 @@
             background-color: #218838;
         }
 
-        #task-form, #achieved-tasks {
+        #task-form, #achieved-tasks, #selected-task {
             display: none;
             text-align: left;
             margin-top: 20px;
@@ -166,6 +168,13 @@
             <h2>Your Achieved Tasks</h2>
             <ul id="achieved-list" class="task-list"></ul>
         </div>
+
+        <!-- Selected Task Section -->
+        <div id="selected-task">
+            <h2>Task Details</h2>
+            <p id="task-details"></p>
+            <button onclick="backToList()">Back to Task List</button>
+        </div>
     </div>
 
     <script>
@@ -174,6 +183,7 @@
         function showSection(sectionId) {
             document.getElementById('task-form').style.display = 'none';
             document.getElementById('achieved-tasks').style.display = 'none';
+            document.getElementById('selected-task').style.display = 'none';
 
             document.getElementById(sectionId).style.display = 'block';
 
@@ -202,19 +212,24 @@
 
             tasks.forEach((task, index) => {
                 const li = document.createElement('li');
-                if (task.achieved) {
-                    li.innerHTML = `
-                    <span>${task.name} - ${task.date}</span>
-                    <button onclick="markAsAchieved(${index})" class="done">Done</button>
-                    `;
-                } else {
-                    li.innerHTML = `
-                    <span>${task.name} - ${task.date}</span>
-                    <button onclick="markAsAchieved(${index})" class="not-done">Not Done</button>
-                    `;
-                }
+                li.innerHTML = `
+                <span>${task.name} - ${task.date}</span>
+                <button onclick="showTaskDetails(${index})">View</button>
+                `;
                 taskList.appendChild(li);
             });
+        }
+
+        function showTaskDetails(index) {
+            document.getElementById('task-form').style.display = 'none';
+            document.getElementById('selected-task').style.display = 'block';
+            const task = tasks[index];
+            document.getElementById('task-details').innerText = `Task: ${task.name}\nDue: ${task.date}`;
+        }
+
+        function backToList() {
+            document.getElementById('selected-task').style.display = 'none';
+            document.getElementById('task-form').style.display = 'block';
         }
 
         function markAsAchieved(index) {
