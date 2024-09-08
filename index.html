@@ -28,6 +28,12 @@
             font-size: 24px;
         }
 
+        h2 {
+            color: #555;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
         img {
             width: 100%;
             height: auto;
@@ -82,7 +88,6 @@
             background-color: #218838;
         }
 
-        /* Add task form and achieved tasks */
         #task-form, #achieved-tasks {
             display: none;
             text-align: left;
@@ -131,6 +136,7 @@
 
     <div class="container">
         <h1>TO DO LIST APP</h1>
+        <h2>Stay Organized, Get More Done, and never miss a deadline again, with our Task management website that lets you set a task and put a reminder to complete the set task.</h2>
         
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ1Clqh4TCTb-H8s3dF-wjcid6UZWDLC8-OS5m1G3kddPrHXplgOKVYyhw&s=10" alt="To-Do List Image">
         
@@ -165,7 +171,6 @@
     <script>
         let tasks = [];
 
-        // Function to show different sections (Tasks, Achieved)
         function showSection(sectionId) {
             document.getElementById('task-form').style.display = 'none';
             document.getElementById('achieved-tasks').style.display = 'none';
@@ -177,7 +182,6 @@
             }
         }
 
-        // Function to add a new task
         function addTask(event) {
             event.preventDefault();
             const taskName = document.getElementById('task-name').value;
@@ -192,7 +196,6 @@
             displayTasks();
         }
 
-        // Function to display tasks in the task list
         function displayTasks() {
             const taskList = document.getElementById('task-list');
             taskList.innerHTML = '';
@@ -214,13 +217,11 @@
             });
         }
 
-        // Function to mark a task as achieved
         function markAsAchieved(index) {
             tasks[index].achieved = true;
             displayTasks();
         }
 
-        // Function to display achieved tasks
         function displayAchievedTasks() {
             const achievedList = document.getElementById('achieved-list');
             achievedList.innerHTML = '';
