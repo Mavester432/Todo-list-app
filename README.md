@@ -1,1 +1,3 @@
-A simple, lightweight to-do list application designed to help users manage tasks efficiently. This app allows users to add, view, complete, and delete tasks from their to-do list. It's built as a minimum viable product (MVP) to demonstrate core functionalities of a task management system.
+A simple, lightweight to-do list application designed to help users manage tasks efficiently. This app allows users to add, view, complete, and delete tasks from their to-do list.
+Welcome to TO DO LIST, your ultimate to-do list and task management solution! Stay organized, boost productivity, and accomplish your goals effortlessly. Whether you're managing personal tasks, planning projects, or tracking daily activities, my website will help you stay on top of your priorities and never miss a deadline again. Let TO DO LIST simplify your life, one task at a time!
+To know more please visit www.linkedin.com/in/mavester
